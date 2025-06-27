@@ -1,32 +1,24 @@
-name: QMetry Test Result Upload
+name: QMetry Upload Test
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: self-hosted
+  upload:
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Echo Hello
-        run: echo "Hello, world!"
+      - name: Show file info
+        run: ls -lh results/
 
-      - name: Run Build/Deploy Commands
+      - name: Upload Junit Results to QMetry
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
-
-      - name: Upload Test Result to QMetry
-        run: |
-          curl --location 'https://testmanagement.qmetry.com/rest/import/createtestscheduleresults/1' \
-          --header 'project: MAC' \
-          --header 'apikey: QsLn2ZCjOwt0pS7O6mt4ildnGCGHCPrcrX0DgyhT' \
-          --form entityType=TESTNG \
-          --form file=@results/Scenario1.xml
+          curl --silent --show-error --write-out "\nStatus: %{http_code}\n" \
+            --location 'https://testmanagement.qmetry.com/rest/import/createtestscheduleresults/1' \
+            --header 'project: MAC' \
+            --header 'apikey: 080G6UpJ57ix4JKNn0hlMtDvhvE6E4BKfQ4saaH2' \
+            --form entityType=JUNIT \
+            --form file=@results/Scenario1.xml
