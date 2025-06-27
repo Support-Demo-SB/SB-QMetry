@@ -26,7 +26,7 @@ jobs:
       - name: Upload Test Result to QMetry
         run: |
           curl --location 'https://testmanagement.qmetry.com/rest/import/createtestscheduleresults/1' \
-          --header 'project: QAS-QTM Integration' \
-          --header 'apikey: <YOUR_API_KEY>' \
-          --form entityType=JUNIT \
-          --form file=@/Users/runner/work/your-project-path/target/test-results.xml
+          --header 'project: MAC' \
+          --header 'apikey: QsLn2ZCjOwt0pS7O6mt4ildnGCGHCPrcrX0DgyhT' \
+          --form entityType=TESTNG \
+          --form file=@/Users/Afjal.Ansari/Downloads/results-file/testng-results.xml
