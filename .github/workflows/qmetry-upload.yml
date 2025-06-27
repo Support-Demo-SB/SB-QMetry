@@ -14,9 +14,19 @@ jobs:
       - name: Show file info
         run: ls -lh results/
 
+      - name: Check testng-results.xml exists
+        run: |
+          if [ ! -f "results/Scenario1.xml" ]; then
+            echo "❌ File does not exist!"
+          exit 1
+          fi
+          echo "✅ File found:"
+          ls -lh results/Scenario1.xml
+
       - name: Upload Junit Results to QMetry
         run: |
-          curl --silent --show-error --write-out "\nStatus: %{http_code}\n" \
+          echo "Uploading Scenario1.xml..."
+           curl --silent --show-error --write-out "\nStatus: %{http_code}\nResponse:\n%{response_body}" \
             --location 'https://testmanagement.qmetry.com/rest/import/createtestscheduleresults/1' \
             --header 'project: MAC' \
             --header 'apikey: 080G6UpJ57ix4JKNn0hlMtDvhvE6E4BKfQ4saaH2' \
