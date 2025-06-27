@@ -1,1 +1,32 @@
+name: QMetry Test Result Upload
 
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Echo Hello
+        run: echo "Hello, world!"
+
+      - name: Run Build/Deploy Commands
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
+
+      - name: Upload Test Result to QMetry
+        run: |
+          curl --location 'https://testmanagement.qmetry.com/rest/import/createtestscheduleresults/1' \
+          --header 'project: MAC' \
+          --header 'apikey: QsLn2ZCjOwt0pS7O6mt4ildnGCGHCPrcrX0DgyhT' \
+          --form entityType=TESTNG \
+          --form file=@/Users/Afjal.Ansari/Downloads/results-file/testng-results.xml
