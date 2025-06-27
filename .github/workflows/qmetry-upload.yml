@@ -29,4 +29,4 @@ jobs:
           --header 'project: MAC' \
           --header 'apikey: QsLn2ZCjOwt0pS7O6mt4ildnGCGHCPrcrX0DgyhT' \
           --form entityType=TESTNG \
-          --form file=@/Users/Afjal.Ansari/Downloads/results-file/testng-results.xml
+          --form file=@results/Scenario1.xml
