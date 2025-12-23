@@ -14,7 +14,7 @@ jobs:
       - name: Show file info
         run: ls -lh results/
 
-      - name: Check testng-results.xml exists
+      - name: Check Scenario1.xml exists
         run: |
           if [ ! -f "results/Scenario1.xml" ]; then
             echo "❌ File does not exist!"
